@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Teacher {
     //region | Attributes
-    String name;
-    long number;
+    private String name;
+    private long number;
     List<Classe> classes;
     //endregion
 
@@ -18,6 +18,22 @@ public class Teacher {
     }
     //endregion
 
+    //region | Getter & Setter
+
+    public String getName() {
+        return name;
+    }
+
+    public long getNumber() {
+        return number;
+    }
+
+    public void setNumber(long number) {
+        this.number = number;
+    }
+
+    //endregion
+
     //region | Methods
     public void fillSummary(Classe classe) {}
 
@@ -26,5 +42,9 @@ public class Teacher {
     public void signSummary(Classe classe) {}
 
     public void giveToFill(Classe classe) {}
+
+    void addClass(Classe classe) {}
+
+    void removeClasse(Classe classe) {}
     //endregion
 }
