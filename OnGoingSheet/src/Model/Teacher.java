@@ -35,16 +35,47 @@ public class Teacher {
     //endregion
 
     //region | Methods
-    public void fillSummary(Classe classe) {}
+    public void fillSummary(Classe classe) {
+        if (classe == null || classe.getTeacher() != this) {
+            return;
+        }
+        classe.registClassInfo();
+        signSummary(classe);
+        giveToFill(classe);
+    }
 
-    public void registSummary(Classe classe) {}
+    public void signSummary(Classe classe) {
+        classe.addSummaryLine(name);
+    }
 
-    public void signSummary(Classe classe) {}
+    public void giveToFill(Classe classe) {
+        for (Student student : classe.getStudents()) {
+            student.signSummary(classe);
+        }
+    }
 
-    public void giveToFill(Classe classe) {}
+    void addClass(Classe classe) {
+        //pre-conditions
+        if (classe == null || classes.contains(classe)) {
+            return;
+        }
 
-    void addClass(Classe classe) {}
+        //actions
+        classes.add(classe);
 
-    void removeClasse(Classe classe) {}
+        //post-conditions
+        classe.setTeacher(this);
+    }
+
+    public void removeClasse(Classe classe) {
+        if (classe == null || !classes.contains(classe)) {
+            return;
+        }
+
+        classes.remove(classe);
+
+
+        classe.removeTeacher();
+    }
     //endregion
 }

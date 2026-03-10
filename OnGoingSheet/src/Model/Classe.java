@@ -12,18 +12,16 @@ public class Classe {
     //endregion
 
     //region | Constructor
-    public Classe(long number, String name, Teacher teacher) {
-        this.number = number;
-        this.name = name;
-        this.teacher = teacher;
+    public Classe(String name, long number) {
+        this(name, number, null, new LinkedList<>());
+
     }
 
-    public Classe(String name, long number, String summary, Teacher teacher, LinkedList<Student> students) {
+    public Classe(String name, long number, Teacher teacher, LinkedList<Student> students) {
         this.name = name;
         this.number = number;
-        this.summary = summary;
         this.teacher = teacher;
-        this.students = students;
+        this.students = new LinkedList<>(students);
     }
 
     //endregion
@@ -43,7 +41,7 @@ public class Classe {
     }
 
     public LinkedList<Student> getStudents() {
-        return students;
+        return new LinkedList<>(students);      //copy to save integrity
     }
 
     public long getNumber() {
@@ -54,17 +52,57 @@ public class Classe {
         this.number = number;
     }
 
+    public void setTeacher(Teacher teacher) {
+        //pre-conditions
+        if (teacher == null || this.teacher == teacher) {
+            return;
+        }
+
+        //actions
+        this.teacher = teacher;
+
+        //post conditions
+        teacher.addClass(this);
+    }
     //endregion
 
     //region | Methods
     public void addSummaryLine(String line) {}
 
-    public void addStudent(Student student) {}
+    public void addStudent(Student student) {
+        if(student == null || students.contains(student)) {
+            return;
+        }
 
-    public void removeStudent(Student student) {}
+        students.add(student);
 
-    public void addTeacher(Teacher teacher) {}
+        student.addClass(this);
+    }
 
-    public void removeTeacher(Teacher teacher) {}
+    public void registClassInfo() {
+        addSummaryLine(name);
+        addSummaryLine(Long.toString(number));
+    }
+
+    public void removeStudent(Student student) {
+        if (student == null || students.contains(student)) {
+            return;
+        }
+
+        students.remove(student);
+
+        student.removeClasse(this);
+    }
+
+    public void removeTeacher() {
+        if (this.teacher == null) {
+            return;
+        }
+
+        Teacher aux = teacher;
+        this.teacher = null;
+
+        aux.removeClasse(this);
+    }
     //endregion
 }

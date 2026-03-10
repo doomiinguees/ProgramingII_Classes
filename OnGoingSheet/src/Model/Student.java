@@ -6,7 +6,7 @@ public class Student {
     //region | Attributes
     private String name;
     private long number;
-    private List<String> classes;
+    private LinkedList<Classe> classes;
     //endregion
 
     //region | Constructor
@@ -34,12 +34,37 @@ public class Student {
     //endregion
 
     //region | Methods
-    public void fillSummary(Classe classe) {}
+    public void fillSummary(Classe classe) {
+        if (classe == null) {
+            return;
+        }
 
-    public void signSummary(Classe classe) {}
+        signSummary(classe);
+    }
 
-    void addClass(Classe classe) {}
+    public void signSummary(Classe classe) {
+        classe.addSummaryLine(name);
+    }
 
-    void removeClasse(Classe classe) {}
+    public void addClass(Classe classe) {
+        if(classe == null || classes.contains(classe)) {
+            return;
+        }
+
+        classes.add(classe);
+
+        classe.addStudent(this);
+    }
+
+    public void removeClasse(Classe classe) {
+        if (classe == null || !classes.contains(classe)) {
+            return;
+        }
+
+        Classe aux = classe;
+        classes.remove(classe);
+
+        aux.removeStudent(this);
+    }
     //endregion
 }
