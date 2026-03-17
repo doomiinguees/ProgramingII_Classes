@@ -6,7 +6,7 @@ public class Classe {
     //region | Attributes
     private String name;
     private long number;
-    private String summary;
+    private StringBuilder summary;
     private Teacher teacher;
     private LinkedList<Student> students;
     //endregion
@@ -20,8 +20,10 @@ public class Classe {
     public Classe(String name, long number, Teacher teacher, LinkedList<Student> students) {
         this.name = name;
         this.number = number;
-        this.teacher = teacher;
+        summary = new StringBuilder();
+        setTeacher(teacher);
         this.students = new LinkedList<>(students);
+        students.forEach(this::addStudent);
     }
 
     //endregion
@@ -33,7 +35,7 @@ public class Classe {
     }
 
     public String getSummary() {
-        return summary;
+        return summary.toString();
     }
 
     public Teacher getTeacher() {
@@ -59,6 +61,7 @@ public class Classe {
         }
 
         //actions
+        removeTeacher();
         this.teacher = teacher;
 
         //post conditions
@@ -67,7 +70,13 @@ public class Classe {
     //endregion
 
     //region | Methods
-    public void addSummaryLine(String line) {}
+    public void addSummaryLine(String line) {
+        if(line == null || line.isBlank()) {
+            return;
+        }
+
+        summary.append(line).append("\n");
+    }
 
     public void addStudent(Student student) {
         if(student == null || students.contains(student)) {
@@ -79,17 +88,15 @@ public class Classe {
         student.addClass(this);
     }
 
-    public void registClassInfo() {
+    public void registerClassInfo() {
         addSummaryLine(name);
         addSummaryLine(Long.toString(number));
     }
 
     public void removeStudent(Student student) {
-        if (student == null || students.contains(student)) {
+        if (!students.remove(student)) {
             return;
         }
-
-        students.remove(student);
 
         student.removeClasse(this);
     }

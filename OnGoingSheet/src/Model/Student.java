@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.*;
+import java.util.LinkedList;
 
 public class Student {
     //region | Attributes
@@ -57,14 +57,11 @@ public class Student {
     }
 
     public void removeClasse(Classe classe) {
-        if (classe == null || !classes.contains(classe)) {
+        if (!classes.remove(classe)) {
             return;
         }
 
-        Classe aux = classe;
-        classes.remove(classe);
-
-        aux.removeStudent(this);
+        classe.removeStudent(this);
     }
     //endregion
 }

@@ -39,7 +39,7 @@ public class Teacher {
         if (classe == null || classe.getTeacher() != this) {
             return;
         }
-        classe.registClassInfo();
+        classe.registerClassInfo();
         signSummary(classe);
         giveToFill(classe);
     }
