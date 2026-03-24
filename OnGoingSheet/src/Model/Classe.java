@@ -9,26 +9,28 @@ public class Classe {
     private StringBuilder summary;
     private Teacher teacher;
     private LinkedList<Student> students;
+    private Schedule schedule;
     //endregion
 
     //region | Constructor
-    public Classe(String name, long number) {
-        this(name, number, null, new LinkedList<>());
+    public Classe(String name, long number, Schedule schedule) {
+        this(name, number, null, null, new LinkedList<>());
 
     }
 
-    public Classe(String name, long number, Teacher teacher, LinkedList<Student> students) {
+    public Classe(String name, long number, Schedule schedule, Teacher teacher, LinkedList<Student> students) {
         this.name = name;
         this.number = number;
+        this.schedule = schedule;
         summary = new StringBuilder();
         setTeacher(teacher);
-        this.students = new LinkedList<>(students);
+        this.students = new LinkedList<>();
         students.forEach(this::addStudent);
     }
 
     //endregion
 
-    //region | Getters & Setter
+    //region | Getters & Setters
 
     public String getName() {
         return name;
@@ -50,6 +52,10 @@ public class Classe {
         return number;
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
     public void setNumber(long number) {
         this.number = number;
     }
@@ -67,6 +73,7 @@ public class Classe {
         //post conditions
         teacher.addClass(this);
     }
+
     //endregion
 
     //region | Methods

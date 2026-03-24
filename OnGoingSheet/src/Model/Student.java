@@ -31,6 +31,17 @@ public class Student {
         return number;
     }
 
+    public LinkedList<Classe> getClasses (Schedule schedule) {
+        LinkedList<Classe> result = new LinkedList<>();
+
+        for (Classe classe : classes) {
+            if(classe.getSchedule().intersect(schedule)) {
+                result.add(classe);
+            }
+        }
+
+        return result;
+    }
     //endregion
 
     //region | Methods
