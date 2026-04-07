@@ -3,48 +3,18 @@ package Model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Teacher {
+public class Teacher extends Person {
     //region | Attributes
-    private String name;
-    private long number;
     List<Classe> classes;
     //endregion
 
     //region | Constructor
     public Teacher(String name, long number) {
-        this.name = name;
-        this.number = number;
+        super(name, number);
         this.classes = new LinkedList<>();
     }
     //endregion
 
-    //region | Getter & Setter
-
-    public String getName() {
-        return name;
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public void setNumber(long number) {
-        this.number = number;
-    }
-
-    public LinkedList<Classe> getClasses (Schedule schedule) {
-        LinkedList<Classe> result = new LinkedList<>();
-
-        for (Classe classe : classes) {
-            if(classe.getSchedule().intersect(schedule)) {
-                result.add(classe);
-            }
-        }
-
-        return result;
-    }
-
-    //endregion
 
     //region | Methods
     public void fillSummary(Classe classe) {
@@ -57,7 +27,7 @@ public class Teacher {
     }
 
     public void signSummary(Classe classe) {
-        classe.addSummaryLine(name);
+        classe.addSummaryLine(getName());
     }
 
     public void giveToFill(Classe classe) {

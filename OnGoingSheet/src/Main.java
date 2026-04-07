@@ -50,6 +50,11 @@ public class Main {
         }
         class4.addStudent(student3);
 
+        LinkedList<Classe> aulasAluno2TercaFeiraTarde = student2.getClasses(new Schedule(WeekDay.TUESDAY, 14, 10));
+        LinkedList<Classe> aulasAluno2TercaFeiraAposAsDezanoveHoras = student2.getClasses(new Schedule(WeekDay.TUESDAY, 19, 5));
+        LinkedList<Classe> aulasAluno2TercaFeiraAposAsVinteHoras = student2.getClasses(new Schedule(WeekDay.TUESDAY, 20, 4));
+        LinkedList<Classe> aulasAluno3TercaFeira = student2.getClasses(new Schedule(WeekDay.TUESDAY, 8, 16));
+
         teacher1.fillSummary(class1);
 
         System.out.println("Resumo da aula 1:");

@@ -2,35 +2,19 @@ package Model;
 
 import java.util.LinkedList;
 
-public class Student {
+public class Student extends Person{
     //region | Attributes
-    private String name;
-    private long number;
     private LinkedList<Classe> classes;
     //endregion
 
     //region | Constructor
     public Student(String name, long number) {
-        this.name = name;
-        this.number = number;
+        super(name, number);
         this.classes = new LinkedList<>();
     }
     //endregion
 
     //region | Getters & Setter
-
-    public String getName() {
-        return name;
-    }
-
-    public void setNumber(long number) {
-        this.number = number;
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
     public LinkedList<Classe> getClasses (Schedule schedule) {
         LinkedList<Classe> result = new LinkedList<>();
 
@@ -54,7 +38,7 @@ public class Student {
     }
 
     public void signSummary(Classe classe) {
-        classe.addSummaryLine(name);
+        classe.addSummaryLine(getName());
     }
 
     public void addClass(Classe classe) {

@@ -14,7 +14,7 @@ public class Classe {
 
     //region | Constructor
     public Classe(String name, long number, Schedule schedule) {
-        this(name, number, null, null, new LinkedList<>());
+        this(name, number, schedule, null, new LinkedList<>());
 
     }
 
@@ -102,7 +102,7 @@ public class Classe {
 
     public void removeStudent(Student student) {
         if (!students.remove(student)) {
-            return;
+            return; 
         }
 
         student.removeClasse(this);
