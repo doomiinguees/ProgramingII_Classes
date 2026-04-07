@@ -1,11 +1,11 @@
 package Model;
 
-public class Person {
+public class Identifier {
 
     private String name;
     private long number;
 
-    public Person(String name, long number) {
+    public Identifier(String name, long number) {
         this.name = name;
         this.number = number;
     }

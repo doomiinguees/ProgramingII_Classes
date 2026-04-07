@@ -2,10 +2,8 @@ package Model;
 
 import java.util.LinkedList;
 
-public class Classe {
+public class Classe extends Identifier{
     //region | Attributes
-    private String name;
-    private long number;
     private StringBuilder summary;
     private Teacher teacher;
     private LinkedList<Student> students;
@@ -19,8 +17,7 @@ public class Classe {
     }
 
     public Classe(String name, long number, Schedule schedule, Teacher teacher, LinkedList<Student> students) {
-        this.name = name;
-        this.number = number;
+        super(name, number);
         this.schedule = schedule;
         summary = new StringBuilder();
         setTeacher(teacher);
@@ -31,11 +28,6 @@ public class Classe {
     //endregion
 
     //region | Getters & Setters
-
-    public String getName() {
-        return name;
-    }
-
     public String getSummary() {
         return summary.toString();
     }
@@ -48,16 +40,8 @@ public class Classe {
         return new LinkedList<>(students);      //copy to save integrity
     }
 
-    public long getNumber() {
-        return number;
-    }
-
     public Schedule getSchedule() {
         return schedule;
-    }
-
-    public void setNumber(long number) {
-        this.number = number;
     }
 
     public void setTeacher(Teacher teacher) {
@@ -96,13 +80,13 @@ public class Classe {
     }
 
     public void registerClassInfo() {
-        addSummaryLine(name);
-        addSummaryLine(Long.toString(number));
+        addSummaryLine(getName());
+        addSummaryLine(Long.toString(getNumber()));
     }
 
     public void removeStudent(Student student) {
         if (!students.remove(student)) {
-            return; 
+            return;
         }
 
         student.removeClasse(this);
