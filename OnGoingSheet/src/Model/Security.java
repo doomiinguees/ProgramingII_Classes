@@ -2,23 +2,16 @@ package Model;
 
 import java.util.LinkedList;
 
-public class Security {
-    private String name;
-    private long number;
+public class Security extends Person {
     private SecurityOffice securityOffice;
     private LinkedList<Schedule> openingHours;
 
     public Security(String name, long number, SecurityOffice securityOffice) {
-        this.name = name;
-        this.number = number;
+        super(name, number);
         if(securityOffice != null) {
             setSecurityOffice(securityOffice);
         }
         openingHours = new LinkedList<>();
-    }
-
-    public String getName() {
-        return name;
     }
 
     public SecurityOffice getSecurityOffice() {
@@ -29,72 +22,16 @@ public class Security {
         return openingHours;
     }
 
-    public void openOffice() {
-        if (securityOffice != null || securityOffice.isOpenDoor()) {
-            securityOffice.openDoor();
+    public void openDivision(Division division) {
+        if (division != null || division.isOpenDoor()) {
+            division.openDoor();
         }
     }
 
-    public void closeOffice() {
-        if (securityOffice != null || !securityOffice.isOpenDoor()) {
-            securityOffice.closeDoor();
+    public void closeDivision(Division division) {
+        if (division != null || !division.isOpenDoor()) {
+            division.closeDoor();
         }
-    }
-
-    public void openTeacherOffice (TeacherOffice teacherOffice) {
-        if (teacherOffice == null || teacherOffice.isOpenDoor()) {
-            return;
-        }
-
-        teacherOffice.openDoor();
-    }
-
-    public void closeTeacherOffice (TeacherOffice teacherOffice) {
-        if (teacherOffice == null || !teacherOffice.isOpenDoor()) {
-            return;
-        }
-
-        teacherOffice.closeDoor();
-    }
-
-    public void openSecurityOffice (SecurityOffice securityOffice) {
-        if (securityOffice == null || securityOffice.isOpenDoor()) {
-            return;
-        }
-
-        securityOffice.openDoor();
-    }
-
-    public void closeSecurityOffice (SecurityOffice securityOffice) {
-        if (securityOffice == null || !securityOffice.isOpenDoor()) {
-            return;
-        }
-
-        securityOffice.closeDoor();
-    }
-
-    public void openRoom (Room room) {
-        if (room == null || room.isOpenDoor()) {
-            return;
-        }
-
-        room.openDoor();
-    }
-
-    public void closeRoom (Room room) {
-        if (room == null || !room.isOpenDoor()) {
-            return;
-        }
-
-        room.closeDoor();
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public void setNumber(long number) {
-        this.number = number;
     }
 
     public void setSecurityOffice(SecurityOffice securityOffice) {
@@ -105,10 +42,18 @@ public class Security {
         removeSecurityOffice();
         this.securityOffice = securityOffice;
 
+        securityOffice.addSecurity(this);
     }
 
     public void removeSecurityOffice() {
+        if (securityOffice == null) {
+            return;
+        }
 
+        SecurityOffice aux = this.securityOffice;
+        this.securityOffice = null;
+
+        aux.removeSecurity(this);
     }
 
     public void addSchedule(Schedule schedule) {

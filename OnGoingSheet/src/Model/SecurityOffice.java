@@ -1,14 +1,34 @@
 package Model;
 
-public class SecurityOffice {
+import java.util.LinkedList;
 
-    public boolean isOpenDoor() {
-        return false;
+public class SecurityOffice extends Division {
+    private LinkedList<Security> securityOfficers;
+
+    public SecurityOffice(String name, boolean openDoor) {
+        super(name,openDoor);
+        securityOfficers = new LinkedList<>();
     }
 
-    public void openDoor() {
+    public LinkedList<Security> getSecurityOfficers() {
+        return securityOfficers;
     }
 
-    public void closeDoor() {
+    public void addSecurity(Security security) {
+        if(security == null || securityOfficers.contains(security)) {
+            return;
+        }
+        securityOfficers.add(security);
+
+        security.setSecurityOffice(this);
+    }
+
+    public void removeSecurity(Security security) {
+        if(security == null || !securityOfficers.contains(security)) {
+            return;
+        }
+        securityOfficers.remove(security);
+
+        security.removeSecurityOffice();
     }
 }

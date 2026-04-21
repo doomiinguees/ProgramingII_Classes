@@ -131,7 +131,7 @@ public class Classe extends Identifier{
         Room aux = this.room;
         this.room = null;
 
-        aux.removeClasse();
+        aux.removeClasse(this);
     }
     //endregion
 }

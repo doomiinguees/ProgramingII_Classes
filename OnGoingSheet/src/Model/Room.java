@@ -2,14 +2,11 @@ package Model;
 
 import java.util.LinkedList;
 
-public class Room {
-    private String name;
+public class Room extends Division {
     private LinkedList<Classe> classes;
-    private boolean openDoor;
 
     public Room(String name, boolean openDoor) {
-        this.name = name;
-        this.openDoor = openDoor;
+        super(name, openDoor);
     }
 
     public LinkedList<Classe> getClasses() {
@@ -30,30 +27,6 @@ public class Room {
         }
 
         return result;
-    }
-
-    public boolean isOpenDoor() {
-        return openDoor;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void openDoor(){
-        if (isOpenDoor()) {
-            return;
-        }
-
-        this.openDoor = true;
-    }
-
-    public void closeDoor() {
-        if (isOpenDoor()) {
-            return;
-        }
-
-        this.openDoor = true;
     }
 
     public void addClasse(Classe classe) {

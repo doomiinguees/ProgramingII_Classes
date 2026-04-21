@@ -2,7 +2,7 @@ package Model;
 
 import java.util.LinkedList;
 
-public abstract class Academic extends Identifier {
+public abstract class Academic extends Person {
 
     private LinkedList<Classe> classes;
 

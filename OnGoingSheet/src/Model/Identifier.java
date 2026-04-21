@@ -1,21 +1,12 @@
 package Model;
 
-public class Identifier {
+public class Identifier extends Describer{
 
-    private String name;
     private long number;
 
     public Identifier(String name, long number) {
-        this.name = name;
+        super(name);
         this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public long getNumber() {
