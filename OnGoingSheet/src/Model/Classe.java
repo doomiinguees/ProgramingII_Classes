@@ -8,17 +8,22 @@ public class Classe extends Identifier{
     private Teacher teacher;
     private LinkedList<Student> students;
     private Schedule schedule;
+    private Room room;
+
     //endregion
 
     //region | Constructor
-    public Classe(String name, long number, Schedule schedule) {
-        this(name, number, schedule, null, new LinkedList<>());
+    public Classe(String name, long number, Schedule schedule, Room room) {
+        this(name, number, schedule, room, null, new LinkedList<>());
 
     }
 
-    public Classe(String name, long number, Schedule schedule, Teacher teacher, LinkedList<Student> students) {
+    public Classe(String name, long number, Schedule schedule, Room room, Teacher teacher, LinkedList<Student> students) {
         super(name, number);
         this.schedule = schedule;
+        if(room != null) {
+            setRoom(room);
+        }
         summary = new StringBuilder();
         setTeacher(teacher);
         this.students = new LinkedList<>();
@@ -30,6 +35,10 @@ public class Classe extends Identifier{
     //region | Getters & Setters
     public String getSummary() {
         return summary.toString();
+    }
+
+    public Room getRoom() {
+        return room;
     }
 
     public Teacher getTeacher() {
@@ -101,6 +110,28 @@ public class Classe extends Identifier{
         this.teacher = null;
 
         aux.removeClasse(this);
+    }
+
+    public void setRoom(Room room) {
+        if(room == null || this.room == room) {
+            return;
+        }
+
+        removeRoom();
+        this.room = room;
+
+        room.addClasse(this);
+    }
+
+    public void removeRoom() {
+        if (room == null) {
+            return;
+        }
+
+        Room aux = this.room;
+        this.room = null;
+
+        aux.removeClasse();
     }
     //endregion
 }
