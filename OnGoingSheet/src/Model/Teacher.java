@@ -2,15 +2,16 @@ package Model;
 
 import java.util.LinkedList;
 
-public class Teacher extends Academic {
+public class Teacher extends Academic implements Employee<TeacherOffice>{
 
     public TeacherOffice teacherOffice;
-    private LinkedList<Schedule> openingHours;
+    private EmployeeManager manager;
     public Teacher(String name, long number, TeacherOffice teacherOffice) {
         super(name, number);
         if (teacherOffice != null) {
             setOffice(teacherOffice);
         }
+        manager = new EmployeeManager();
     }
 
     public TeacherOffice getTeacherOffice() {
@@ -18,7 +19,7 @@ public class Teacher extends Academic {
     }
 
     public LinkedList<Schedule> getOpeningHours() {
-        return openingHours;
+        return manager.getOpeningHours();
     }
 
     @Override
@@ -41,7 +42,7 @@ public class Teacher extends Academic {
     }
 
     @Override
-    protected void attributeClasse(Classe classe) {
+    public void attributeClasse(Classe classe) {
         if (classe == null) {
             return;
         }
@@ -49,7 +50,7 @@ public class Teacher extends Academic {
     }
 
     @Override
-    protected void disableClasse(Classe classe) {
+    public void disableClasse(Classe classe) {
         if (classe == null) {
             return;
         }
@@ -133,19 +134,11 @@ public class Teacher extends Academic {
     }
 
     public void addSchedule(Schedule schedule) {
-        if (schedule == null || openingHours.contains(schedule)) {
-            return;
-        }
-
-        openingHours.add(schedule);
+        manager.addSchedule(schedule);
     }
 
     public void removeSchedule(Schedule schedule) {
-        if (schedule == null || !openingHours.contains(schedule)) {
-            return;
-        }
-
-        openingHours.remove(schedule);
+        manager.removeSchedule(schedule);
     }
 
 

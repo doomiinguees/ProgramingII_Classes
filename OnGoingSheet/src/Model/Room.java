@@ -2,54 +2,40 @@ package Model;
 
 import java.util.LinkedList;
 
-public class Room extends Division implements ClassesManager {
-    private LinkedList<Classe> classes;
+public class Room extends Division implements ClassesRepo {
+
+    private ClassesManager manager;
 
     public Room(String name, boolean openDoor) {
         super(name, openDoor);
+        manager = new ClassesManager(this);
     }
 
     @Override
     public LinkedList<Classe> getClasses() {
-        return new LinkedList<>(classes);
+        return manager.getClasses();
     }
 
     @Override
     public LinkedList<Classe> getClasses(Schedule schedule) {
-        LinkedList<Classe> result = new LinkedList<>();
-
-        if (schedule == null) {
-            return result;
-        }
-
-        for (Classe classe : classes) {
-            if (classe.getSchedule().intersect(schedule)) {
-                result.add(classe);
-            }
-        }
-
-        return result;
+        return manager.getClasses(schedule);
     }
 
     @Override
     public void addClasse(Classe classe) {
-        if (classe == null || classes.contains(classe)){
-            return;
-        }
+        manager.addClasse(classe);
+    }
 
-        classes.add(classe);
-
+    public void attributeClasse(Classe classe) {
         classe.setRoom(this);
     }
 
     @Override
     public void removeClasse(Classe classe){
-        if (classe == null || !classes.contains(classe)) {
-            return;
-        }
+        manager.removeClasse(classe);
+    }
 
-        classes.remove(classe);
-
+    public void disableClasse(Classe classe){
         classe.removeRoom();
     }
 }

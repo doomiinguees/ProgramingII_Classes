@@ -2,33 +2,21 @@ package Model;
 
 import java.util.LinkedList;
 
-public abstract class Academic extends Person {
+public abstract class Academic extends Person implements ClassesRepo{
 
-    private LinkedList<Classe> classes;
+    private ClassesManager manager;
 
     public Academic(String name, long number) {
         super(name, number);
-        this.classes = new LinkedList<>();
+        manager = new ClassesManager(this);
     }
 
     public LinkedList<Classe> getClasses() {
-        return classes;
+        return manager.getClasses();
     }
 
     public LinkedList<Classe> getClasses(Schedule schedule) {
-        LinkedList<Classe> result = new LinkedList<>();
-
-        if (schedule == null) {
-            return result;
-        }
-
-        for (Classe classe : classes) {
-            if (classe.getSchedule().intersect(schedule)) {
-                result.add(classe);
-            }
-        }
-
-        return result;
+        return manager.getClasses();
     }
 
     public void signSummary(Classe classe) {
@@ -39,26 +27,17 @@ public abstract class Academic extends Person {
         classe.addSummaryLine(getName());
     }
 
-    public void addClass(Classe classe) {
-        if (classe == null || classes.contains(classe)) {
-            return;
-        }
-
-        classes.add(classe);
-        attributeClasse(classe);
+    public void addClasse(Classe classe) {
+        manager.addClasse(classe);
     }
 
     public void removeClasse(Classe classe) {
-        if (classe == null || !classes.remove(classe)) {
-            return;
-        }
-
-        disableClasse(classe);
+        manager.removeClasse(classe);
     }
 
-    protected abstract void attributeClasse(Classe classe);
+    public abstract void attributeClasse(Classe classe);
 
     public abstract void fillSummary(Classe classe);
 
-    protected abstract void disableClasse(Classe classe);
+    public abstract void disableClasse(Classe classe);
 }

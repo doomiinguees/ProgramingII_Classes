@@ -2,16 +2,54 @@ package Model;
 
 import java.util.LinkedList;
 
-public interface ClassesManager {
-    LinkedList<Classe> getClasses();
+public class ClassesManager {
 
-    LinkedList<Classe> getClasses(Schedule schedule);
+    protected LinkedList<Classe> classes;
 
-    void addClasse(Classe classe);
+    private ClassesRepo owner;
 
-    void removeClasse(Classe classe);
+    public ClassesManager(ClassesRepo owner) {
+        this.classes = new LinkedList<>();
+        this.owner = owner;
+    }
 
-    default void sayHello(){
-        System.out.println("Holle");
+    public LinkedList<Classe> getClasses() {
+        return new LinkedList<>(classes);
+    }
+
+    public LinkedList<Classe> getClasses(Schedule schedule) {
+        LinkedList<Classe> result = new LinkedList<>();
+
+        if (schedule == null) {
+            return result;
+        }
+
+        for (Classe classe : classes) {
+            if (classe.getSchedule().intersect(schedule)) {
+                result.add(classe);
+            }
+        }
+
+        return result;
+    }
+
+    public void addClasse(Classe classe) {
+        if (classe == null || classes.contains(classe)){
+            return;
+        }
+
+        classes.add(classe);
+
+        owner.attributeClasse(classe);
+    }
+
+    public void removeClasse(Classe classe){
+        if (classe == null || !classes.contains(classe)) {
+            return;
+        }
+
+        classes.remove(classe);
+
+        owner.disableClasse(classe);
     }
 }

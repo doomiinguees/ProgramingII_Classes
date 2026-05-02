@@ -2,16 +2,16 @@ package Model;
 
 import java.util.LinkedList;
 
-public class Security extends Person {
+public class Security extends Person implements Employee{
     private SecurityOffice securityOffice;
-    private LinkedList<Schedule> openingHours;
+    private EmployeeManager manager;
 
     public Security(String name, long number, SecurityOffice securityOffice) {
         super(name, number);
         if(securityOffice != null) {
             setSecurityOffice(securityOffice);
         }
-        openingHours = new LinkedList<>();
+        manager = new EmployeeManager();
     }
 
     public SecurityOffice getSecurityOffice() {
@@ -19,19 +19,35 @@ public class Security extends Person {
     }
 
     public LinkedList<Schedule> getOpeningHours() {
-        return openingHours;
+        return manager.getOpeningHours();
     }
 
     public void openDivision(Division division) {
-        if (division != null || division.isOpenDoor()) {
+        if (division != null && division.isOpenDoor()) {
             division.openDoor();
         }
     }
 
     public void closeDivision(Division division) {
-        if (division != null || !division.isOpenDoor()) {
+        if (division != null && !division.isOpenDoor()) {
             division.closeDoor();
         }
+    }
+
+    public void openOffice() {
+        if (securityOffice == null || securityOffice.isOpenDoor()) {
+            return;
+        }
+
+        securityOffice.openDoor();
+    }
+
+    public void closeOffice() {
+        if (securityOffice == null || !securityOffice.isOpenDoor()) {
+            return;
+        }
+
+        securityOffice.closeDoor();
     }
 
     public void setSecurityOffice(SecurityOffice securityOffice) {
@@ -57,19 +73,11 @@ public class Security extends Person {
     }
 
     public void addSchedule(Schedule schedule) {
-        if (schedule == null || openingHours.contains(schedule)) {
-            return;
-        }
-
-        openingHours.add(schedule);
+        manager.addSchedule(schedule);
     }
 
     public void removeSchedule(Schedule schedule) {
-        if (schedule == null || !openingHours.contains(schedule)) {
-            return;
-        }
-
-        openingHours.remove(schedule);
+        manager.removeSchedule(schedule);
     }
 
 }

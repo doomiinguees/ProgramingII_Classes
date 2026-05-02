@@ -64,7 +64,7 @@ public class Classe extends Identifier{
         this.teacher = teacher;
 
         //post conditions
-        teacher.addClass(this);
+        teacher.addClasse(this);
     }
 
     //endregion
@@ -85,7 +85,7 @@ public class Classe extends Identifier{
 
         students.add(student);
 
-        student.addClass(this);
+        student.addClasse(this);
     }
 
     public void registerClassInfo() {

@@ -15,7 +15,7 @@ public class Student extends Academic {
     }
 
     @Override
-    protected void attributeClasse(Classe classe) {
+    public void attributeClasse(Classe classe) {
         if (classe == null) {
             return;
         }
@@ -23,7 +23,7 @@ public class Student extends Academic {
     }
 
     @Override
-    protected void disableClasse(Classe classe) {
+    public void disableClasse(Classe classe) {
         if (classe == null) {
             return;
         }
