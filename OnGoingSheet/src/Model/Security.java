@@ -2,24 +2,49 @@ package Model;
 
 import java.util.LinkedList;
 
-public class Security extends Person implements Employee{
-    private SecurityOffice securityOffice;
-    private EmployeeManager manager;
+public class Security extends Person implements Employee<SecurityOffice>{
+    private EmployeeManager<Security, SecurityOffice> manager;
 
-    public Security(String name, long number, SecurityOffice securityOffice) {
+    public Security(String name, long number, SecurityOffice office) {
         super(name, number);
-        if(securityOffice != null) {
-            setSecurityOffice(securityOffice);
+        manager = new EmployeeManager(this);
+        if(office != null) {
+            manager.setOffice(office);
         }
-        manager = new EmployeeManager();
     }
 
-    public SecurityOffice getSecurityOffice() {
-        return securityOffice;
+    public SecurityOffice getOffice() {
+        return manager.getOffice();
     }
 
     public LinkedList<Schedule> getOpeningHours() {
         return manager.getOpeningHours();
+    }
+
+    @Override
+    public void removeOffice() {
+        manager.removeOffice();
+    }
+
+    @Override
+    public void setOffice(SecurityOffice office) {
+        manager.setOffice(office);
+    }
+
+    public void openOffice() {
+        manager.openOffice();
+    }
+
+    public void closeOffice() {
+        manager.closeOffice();
+    }
+
+    public void addSchedule(Schedule schedule) {
+        manager.addSchedule(schedule);
+    }
+
+    public void removeSchedule(Schedule schedule) {
+        manager.removeSchedule(schedule);
     }
 
     public void openDivision(Division division) {
@@ -34,50 +59,6 @@ public class Security extends Person implements Employee{
         }
     }
 
-    public void openOffice() {
-        if (securityOffice == null || securityOffice.isOpenDoor()) {
-            return;
-        }
 
-        securityOffice.openDoor();
-    }
-
-    public void closeOffice() {
-        if (securityOffice == null || !securityOffice.isOpenDoor()) {
-            return;
-        }
-
-        securityOffice.closeDoor();
-    }
-
-    public void setSecurityOffice(SecurityOffice securityOffice) {
-        if (securityOffice == null || this.securityOffice == securityOffice) {
-            return;
-        }
-
-        removeSecurityOffice();
-        this.securityOffice = securityOffice;
-
-        securityOffice.addSecurity(this);
-    }
-
-    public void removeSecurityOffice() {
-        if (securityOffice == null) {
-            return;
-        }
-
-        SecurityOffice aux = this.securityOffice;
-        this.securityOffice = null;
-
-        aux.removeSecurity(this);
-    }
-
-    public void addSchedule(Schedule schedule) {
-        manager.addSchedule(schedule);
-    }
-
-    public void removeSchedule(Schedule schedule) {
-        manager.removeSchedule(schedule);
-    }
 
 }

@@ -2,12 +2,15 @@ package Model;
 
 import java.util.LinkedList;
 
-public class EmployeeManager {
+public class EmployeeManager <E extends Employee, O extends Office<E>>{
 
     private LinkedList<Schedule> openingHours;
+    private O office;
+    private E owner;
 
-    public EmployeeManager() {
+    public EmployeeManager(E owner) {
         openingHours = new LinkedList<>();
+        this.owner = owner;
     }
 
     public LinkedList<Schedule> getOpeningHours() {
@@ -28,5 +31,47 @@ public class EmployeeManager {
         }
 
         openingHours.remove(schedule);
+    }
+
+    public O getOffice() {
+        return office;
+    }
+
+    public void setOffice(O office) {
+        if (office == null || this.owner == office) {
+            return;
+        }
+
+        removeOffice();
+        this.office = office;
+
+        office.addEmployee(owner);
+    }
+
+    public void removeOffice() {
+        if (office == null) {
+            return;
+        }
+
+        O aux = office;
+        office = null;
+
+        aux.removeEmployee(owner);
+    }
+
+    public void openOffice() {
+        if (office == null || office.isOpenDoor()) {
+            return;
+        }
+
+        office.openDoor();
+    }
+
+    public void closeOffice() {
+        if (office == null || !office.isOpenDoor()) {
+            return;
+        }
+
+        office.closeDoor();
     }
 }

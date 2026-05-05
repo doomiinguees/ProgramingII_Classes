@@ -7,4 +7,5 @@ import java.util.LinkedList;
     public SecurityOffice(String name, boolean openDoor) {
         super(name,openDoor);
     }
-}
+
+    }

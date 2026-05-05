@@ -15,4 +15,5 @@ public interface Employee<T extends Office> {
 
     void setOffice(T office);
 
+    void removeOffice();
 }

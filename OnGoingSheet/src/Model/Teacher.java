@@ -65,7 +65,7 @@ public class Teacher extends Academic implements Employee<TeacherOffice>{
         removeOffice();
         this.teacherOffice = teacherOffice;
 
-        teacherOffice.addTeacher(this);
+        teacherOffice.addEmployee(this);
     }
 
     public void removeOffice() {
@@ -76,7 +76,7 @@ public class Teacher extends Academic implements Employee<TeacherOffice>{
         TeacherOffice aux = teacherOffice;
         teacherOffice = null;
 
-        aux.removeTeacher(this);
+        aux.removeEmployee(this);
     }
 
     public void openOffice () {
@@ -119,7 +119,7 @@ public class Teacher extends Academic implements Employee<TeacherOffice>{
         removeTeacherOffice();
         this.teacherOffice = teacherOffice;
 
-        teacherOffice.addTeacher(this);
+        teacherOffice.addEmployee(this);
     }
 
     public void removeTeacherOffice() {
@@ -130,7 +130,7 @@ public class Teacher extends Academic implements Employee<TeacherOffice>{
         TeacherOffice aux = teacherOffice;
         teacherOffice = null;
 
-        aux.removeTeacher(this);
+        aux.removeEmployee(this);
     }
 
     public void addSchedule(Schedule schedule) {
