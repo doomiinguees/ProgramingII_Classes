@@ -3,11 +3,11 @@ package Model;
 import java.util.LinkedList;
 
 public class Security extends Person implements Employee<SecurityOffice>{
-    private EmployeeManager<Security, SecurityOffice> manager;
+    private EmployeeManager<Security, SecurityOffice, Division> manager;
 
     public Security(String name, long number, SecurityOffice office) {
         super(name, number);
-        manager = new EmployeeManager(this);
+        manager = new EmployeeManager<>(this);
         if(office != null) {
             manager.setOffice(office);
         }
@@ -48,15 +48,11 @@ public class Security extends Person implements Employee<SecurityOffice>{
     }
 
     public void openDivision(Division division) {
-        if (division != null && division.isOpenDoor()) {
-            division.openDoor();
-        }
+        manager.openDivision(division);
     }
 
     public void closeDivision(Division division) {
-        if (division != null && !division.isOpenDoor()) {
-            division.closeDoor();
-        }
+        manager.closeDivision(division);
     }
 
 

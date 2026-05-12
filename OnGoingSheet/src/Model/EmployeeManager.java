@@ -2,7 +2,7 @@ package Model;
 
 import java.util.LinkedList;
 
-public class EmployeeManager <E extends Employee, O extends Office<E>>{
+public class EmployeeManager <E extends Employee, O extends Office<E>, D extends Division>{
 
     private LinkedList<Schedule> openingHours;
     private O office;
@@ -73,5 +73,17 @@ public class EmployeeManager <E extends Employee, O extends Office<E>>{
         }
 
         office.closeDoor();
+    }
+
+    public void openDivision(D division) {
+        if (division != null && division.isOpenDoor()) {
+            division.openDoor();
+        }
+    }
+
+    public void closeDivision(D division) {
+        if (division != null && !division.isOpenDoor()) {
+            division.closeDoor();
+        }
     }
 }

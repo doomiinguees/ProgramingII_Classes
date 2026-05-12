@@ -4,18 +4,18 @@ import java.util.LinkedList;
 
 public class Teacher extends Academic implements Employee<TeacherOffice>{
 
-    public TeacherOffice teacherOffice;
-    private EmployeeManager manager;
+    private EmployeeManager<Teacher, TeacherOffice, Room> manager;
+
     public Teacher(String name, long number, TeacherOffice teacherOffice) {
         super(name, number);
+        manager = new EmployeeManager<>(this);
         if (teacherOffice != null) {
-            setOffice(teacherOffice);
+            manager.setOffice(teacherOffice);
         }
-        manager = new EmployeeManager();
     }
 
     public TeacherOffice getTeacherOffice() {
-        return teacherOffice;
+        return manager.getOffice();
     }
 
     public LinkedList<Schedule> getOpeningHours() {
@@ -58,79 +58,27 @@ public class Teacher extends Academic implements Employee<TeacherOffice>{
     }
 
     public void setOffice(TeacherOffice teacherOffice) {
-        if (teacherOffice == null || this.teacherOffice == null) {
-            return;
-        }
-
-        removeOffice();
-        this.teacherOffice = teacherOffice;
-
-        teacherOffice.addEmployee(this);
+        manager.setOffice(teacherOffice);
     }
 
     public void removeOffice() {
-        if (teacherOffice == null) {
-            return;
-        }
-
-        TeacherOffice aux = teacherOffice;
-        teacherOffice = null;
-
-        aux.removeEmployee(this);
+        manager.removeOffice();
     }
 
     public void openOffice () {
-        if (teacherOffice == null || teacherOffice.isOpenDoor()) {
-            return;
-        }
-
-        teacherOffice.openDoor();
+        manager.openOffice();
     }
 
     public void closeOffice () {
-        if (teacherOffice == null || !teacherOffice.isOpenDoor()) {
-            return;
-        }
-
-        teacherOffice.closeDoor();
+        manager.closeOffice();
     }
 
     public void openRoom (Room room) {
-        if (room == null || room.isOpenDoor()) {
-            return;
-        }
-
-        room    .openDoor();
+        manager.closeDivision(room);
     }
 
     public void closeRoom (Room room) {
-        if (room == null || !room.isOpenDoor()) {
-            return;
-        }
-
-        room.closeDoor();
-    }
-
-    public void setTeacherOffice(TeacherOffice teacherOffice) {
-        if (teacherOffice == null || this.teacherOffice == teacherOffice) {
-            return;
-        }
-
-        removeTeacherOffice();
-        this.teacherOffice = teacherOffice;
-
-        teacherOffice.addEmployee(this);
-    }
-
-    public void removeTeacherOffice() {
-        if (teacherOffice == null) {
-            return;
-        }
-
-        TeacherOffice aux = teacherOffice;
-        teacherOffice = null;
-
-        aux.removeEmployee(this);
+        manager.closeDivision(room);
     }
 
     public void addSchedule(Schedule schedule) {
