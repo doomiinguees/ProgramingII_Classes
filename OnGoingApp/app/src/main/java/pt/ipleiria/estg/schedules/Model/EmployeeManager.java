@@ -38,7 +38,7 @@ public class EmployeeManager <E extends Employee, O extends Office<E>, D extends
     }
 
     public void setOffice(O office) {
-        if (office == null || this.owner == office) {
+        if (office == null || this.office == office) {
             return;
         }
 

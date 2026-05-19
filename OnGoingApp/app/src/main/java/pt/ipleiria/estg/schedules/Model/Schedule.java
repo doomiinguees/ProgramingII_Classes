@@ -1,5 +1,7 @@
 package pt.ipleiria.estg.schedules.Model;
 
+import androidx.annotation.NonNull;
+
 public class Schedule {
 
     //region | Attributes
@@ -43,5 +45,12 @@ public class Schedule {
         return schedule.day == this.day &&
                 schedule.getEndTime() > this.getStart() &&
                 schedule.getStart() < this.getEndTime();
+    }
+
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "\n" + getDay().toString() + " " + getStart() + "-" + (int)getEndTime() ;
     }
 }

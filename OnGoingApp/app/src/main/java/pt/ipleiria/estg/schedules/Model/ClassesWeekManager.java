@@ -134,9 +134,9 @@ public enum ClassesWeekManager {
         // Nota: as classes atuais ainda não inicializam algumas listas internas
         // em Room, TeacherOffice e Teacher. Por isso, para evitar NullPointerException,
         // as salas são criadas mas não são associadas diretamente às classes aqui.
-        Classe classe1 = new Classe("Programação II TP1", 1, new Schedule(WeekDay.MONDAY, 8, 2), null);
-        Classe classe2 = new Classe("Programação II TP2", 2, new Schedule(WeekDay.MONDAY, 8, 2), null);
-        Classe classe3 = new Classe("Programação II PL1", 3, new Schedule(WeekDay.MONDAY, 10, 3), null);
+        Classe classe1 = new Classe("Programação II TP1", 1, new Schedule(WeekDay.MONDAY, 8, 2), roomA1);
+        Classe classe2 = new Classe("Programação II TP2", 2, new Schedule(WeekDay.MONDAY, 8, 2), roomA2);
+        Classe classe3 = new Classe("Programação II PL1", 3, new Schedule(WeekDay.MONDAY, 10, 3), roomLAI1);
 
         Student student1 = new Student("José António", 2170001);
         Student student2 = new Student("Miguel Afonso", 2170002);

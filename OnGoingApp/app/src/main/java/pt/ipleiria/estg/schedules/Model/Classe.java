@@ -1,5 +1,7 @@
 package pt.ipleiria.estg.schedules.Model;
 
+import androidx.annotation.NonNull;
+
 import java.util.LinkedList;
 
 public class Classe extends Identifier{
@@ -134,4 +136,10 @@ public class Classe extends Identifier{
         aux.removeClasse(this);
     }
     //endregion
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "\n" + getName() + "\n" + getRoom() + "\n";
+    }
 }

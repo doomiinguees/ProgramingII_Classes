@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Schedules</string>
+    <string name="teacherLabel">Teacher:</string>
+    <string name="studentsLabel">Students:</string>
 </resources>

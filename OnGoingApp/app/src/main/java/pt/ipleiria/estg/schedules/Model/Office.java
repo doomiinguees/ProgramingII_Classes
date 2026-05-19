@@ -7,6 +7,7 @@ public class Office<T extends Employee> extends Division{
 
     public Office(String name, boolean openDoor) {
         super(name, openDoor);
+        employees = new LinkedList<>();
     }
 
     public LinkedList<T> getEmployees() {
