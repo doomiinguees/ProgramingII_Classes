@@ -3,4 +3,7 @@
     <string name="app_name">Horários</string>
     <string name="teacherLabel">Professor:</string>
     <string name="studentsLabel">Alunos:</string>
+    <string name="addStudent">Adicionar Estudante</string>
+    <string name="name">Nome</string>
+    <string name="Number">Numero</string>
 </resources>

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Schedules">
         <activity
+            android:name=".AddStudentFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".ClasseDetailsActivity"
             android:exported="false" />
         <activity

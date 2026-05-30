@@ -35,7 +35,7 @@ public class Schedule {
         return duration;
     }
 
-    public float getEndTime() {
+    public int getEndTime() {
         return start + duration;
     }
 
@@ -51,6 +51,6 @@ public class Schedule {
     @NonNull
     @Override
     public String toString() {
-        return "\n" + getDay().toString() + " " + getStart() + "-" + (int)getEndTime() ;
+        return "\n" + getDay().toString() + " " + getStart() + "h - " + getEndTime() + "h";
     }
 }

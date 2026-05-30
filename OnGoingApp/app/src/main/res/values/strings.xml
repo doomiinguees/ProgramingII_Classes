@@ -2,4 +2,7 @@
     <string name="app_name">Schedules</string>
     <string name="teacherLabel">Teacher:</string>
     <string name="studentsLabel">Students:</string>
+    <string name="addStudent">Add Student</string>
+    <string name="name">Name</string>
+    <string name="Number">Number</string>
 </resources>

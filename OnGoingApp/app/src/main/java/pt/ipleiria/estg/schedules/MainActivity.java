@@ -2,6 +2,7 @@ package pt.ipleiria.estg.schedules;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,12 +32,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        EdgeToEdge.enable(this);
+        //EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(binding.lvClasses, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        setSupportActionBar(binding.toolbar);
 
 
         LinkedList<Classe> classes = ClassesWeekManager.INSTANCE.getClasses();
@@ -45,11 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.lvClasses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
-                Toast.makeText(MainActivity.this, "Item " + (index+1) + " clicked!", Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(MainActivity.this, ClasseDetailsActivity.class).putExtra("classeIndex", index);
-
-                startActivity(intent);
+                startActivity(ClasseDetailsActivity.createIntent(MainActivity.this, index));
             }
         });
     }
